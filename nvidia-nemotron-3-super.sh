@@ -7,8 +7,6 @@ docker run --device "nvidia.com/gpu=all" \
   -d \
   --shm-size 16g \
   -p 8000:8000 \
-  -e VLLM_NVFP4_GEMM_BACKEND=marlin \
-  -e VLLM_NVFP4_MOE_BACKEND=MARLIN \
   -v ~/.cache/huggingface:/root/.cache/huggingface \
   vllm/vllm-openai:v0.17.1-cu130 \
     --model nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4 \
