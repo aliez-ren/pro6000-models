@@ -1,5 +1,8 @@
 # RTX PRO 6000 LLM models
 
+```bash
+llama-benchy --base-url http://localhost:8000/v1 --model nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4 --depth 2048 8192 32768
+```
 | model                                          |            test |                t/s |     peak t/s |         ttfr (ms) |      est_ppt (ms) |     e2e_ttft (ms) |
 |:-----------------------------------------------|----------------:|-------------------:|-------------:|------------------:|------------------:|------------------:|
 | nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4 |  pp2048 @ d2048 | 10624.08 ± 5870.17 |              |   776.32 ± 700.59 |   772.62 ± 700.59 |   776.48 ± 700.60 |
@@ -9,6 +12,9 @@
 | nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4 | pp2048 @ d32768 |  12390.65 ± 161.59 |              |   2814.04 ± 36.99 |   2810.34 ± 36.99 |   2814.25 ± 36.99 |
 | nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4 |   tg32 @ d32768 |       82.29 ± 1.01 | 84.99 ± 1.04 |                   |                   |                   |
 
+```bash
+llama-benchy --base-url http://localhost:8000/v1 --model AxionML/Qwen3.5-122B-A10B-NVFP4 --depth 2048 8192 32768
+```
 | model                           |            test |                t/s |      peak t/s |       ttfr (ms) |    est_ppt (ms) |   e2e_ttft (ms) |
 |:--------------------------------|----------------:|-------------------:|--------------:|----------------:|----------------:|----------------:|
 | AxionML/Qwen3.5-122B-A10B-NVFP4 |  pp2048 @ d2048 | 13312.36 ± 4746.51 |               | 376.22 ± 176.17 | 370.51 ± 176.17 | 376.45 ± 176.24 |
