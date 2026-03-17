@@ -35,3 +35,16 @@ llama-benchy --base-url http://localhost:8000/v1 --model openai/gpt-oss-120b --d
 | openai/gpt-oss-120b |    tg32 @ d8192 |     178.61 ± 1.09 |  185.23 ± 1.12 |                 |                 |                 |
 | openai/gpt-oss-120b | pp2048 @ d32768 | 10480.27 ± 117.64 |                | 3327.88 ± 37.57 | 3322.47 ± 37.57 | 3336.23 ± 37.60 |
 | openai/gpt-oss-120b |   tg32 @ d32768 |     143.40 ± 0.38 |  148.70 ± 0.38 |                 |                 |                 |
+
+
+```bash
+llama-benchy --base-url http://localhost:8000/v1 --model mistralai/Mistral-Small-4-119B-2603-NVFP4 --depth 2048 8192 32768
+```
+| model                                     |            test |                t/s |     peak t/s |         ttfr (ms) |      est_ppt (ms) |     e2e_ttft (ms) |
+|:------------------------------------------|----------------:|-------------------:|-------------:|------------------:|------------------:|------------------:|
+| mistralai/Mistral-Small-4-119B-2603-NVFP4 |  pp2048 @ d2048 | 27344.40 ± 7338.17 |              |    172.17 ± 54.45 |    164.40 ± 54.45 |    172.36 ± 54.50 |
+| mistralai/Mistral-Small-4-119B-2603-NVFP4 |    tg32 @ d2048 |       96.18 ± 2.28 | 99.31 ± 2.35 |                   |                   |                   |
+| mistralai/Mistral-Small-4-119B-2603-NVFP4 |  pp2048 @ d8192 |  30849.05 ± 129.30 |              |     339.71 ± 1.39 |     331.94 ± 1.39 |     339.90 ± 1.39 |
+| mistralai/Mistral-Small-4-119B-2603-NVFP4 |    tg32 @ d8192 |       89.90 ± 0.28 | 92.86 ± 0.29 |                   |                   |                   |
+| mistralai/Mistral-Small-4-119B-2603-NVFP4 | pp2048 @ d32768 | 12668.60 ± 7560.97 |              | 7168.69 ± 7393.87 | 7160.93 ± 7393.87 | 7168.86 ± 7393.85 |
+| mistralai/Mistral-Small-4-119B-2603-NVFP4 |   tg32 @ d32768 |       40.41 ± 2.97 | 47.06 ± 5.73 |                   |                   |                   |
