@@ -2,6 +2,11 @@
 
 docker rm -f vllm-qwen3-5-122b-a10b-nvfp4
 
+# Fix: replace TokenizersBackend with Qwen2Tokenizer for vLLM compatibility
+# See: https://huggingface.co/RedHatAI/Qwen3.5-122B-A10B-NVFP4/discussions/1#69c2f722ed8df6717be11ad8
+find ~/.cache/huggingface/hub/models--RedHatAI--Qwen3.5-122B-A10B-NVFP4/snapshots -name "tokenizer_config.json" \
+  -exec sed -i 's/"tokenizer_class": "TokenizersBackend"/"tokenizer_class": "Qwen2Tokenizer"/' {} \;
+
 docker run --device "nvidia.com/gpu=all" \
   --name vllm-qwen3-5-122b-a10b-nvfp4 \
   -d \
@@ -10,7 +15,7 @@ docker run --device "nvidia.com/gpu=all" \
   -e VLLM_USE_FLASHINFER_MOE_MXFP4_MXFP8_CUTLASS=1 \
   -v ~/.cache/huggingface:/root/.cache/huggingface \
   vllm/vllm-openai:cu130-nightly \
-    --model AxionML/Qwen3.5-122B-A10B-NVFP4 \
+    --model RedHatAI/Qwen3.5-122B-A10B-NVFP4 \
     --async-scheduling \
     --tensor-parallel-size 1 \
     --pipeline-parallel-size 1 \
