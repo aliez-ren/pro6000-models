@@ -12,8 +12,8 @@ docker run --device "nvidia.com/gpu=all" \
   vllm/vllm-openai:cu130-nightly \
     --model nvidia/Qwen3.5-397B-A17B-NVFP4 \
     --async-scheduling \
-    --tensor-parallel-size 4 \
-    --pipeline-parallel-size 1 \
+    --tensor-parallel-size 2 \
+    --pipeline-parallel-size 2 \
     --data-parallel-size 1 \
     --trust-remote-code \
     --attention-backend TRITON_ATTN \
