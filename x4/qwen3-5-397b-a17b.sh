@@ -8,7 +8,7 @@ docker run --device "nvidia.com/gpu=all" \
   --shm-size 16g \
   -p 8000:8000 \
   -e VLLM_USE_FLASHINFER_MOE_MXFP4_MXFP8_CUTLASS=1 \
-  -v ~/.cache/huggingface:/root/.cache/huggingface \
+  -v /root/.cache/huggingface:/root/.cache/huggingface \
   vllm/vllm-openai:cu130-nightly \
     --model nvidia/Qwen3.5-397B-A17B-NVFP4 \
     --async-scheduling \
