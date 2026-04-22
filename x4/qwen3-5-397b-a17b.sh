@@ -16,7 +16,6 @@ docker run --device "nvidia.com/gpu=all" \
     --pipeline-parallel-size 2 \
     --data-parallel-size 1 \
     --trust-remote-code \
-    --attention-backend TRITON_ATTN \
     --gpu-memory-utilization 0.95 \
     --max-cudagraph-capture-size 64 \
     --enable-chunked-prefill \
