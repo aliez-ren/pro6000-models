@@ -6,7 +6,7 @@ docker run --device "nvidia.com/gpu=all" \
   --name sglang-glm5-1-nvfp4 \
   -d \
   --shm-size 16g \
-  -p 30000:30000 \
+  -p 8000:8000 \
   -e PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
   voipmonitor/sglang:cu130 \
@@ -26,14 +26,12 @@ docker run --device "nvidia.com/gpu=all" \
     --context-length 16384 \
     --chunked-prefill-size 512 \
     --max-prefill-tokens 512 \
-    --nsa-prefill-backend fa3 \
     --cpu-offload-gb 0 \
     --offload-group-size 78 \
     --offload-num-in-group 30 \
     --offload-prefetch-step 1 \
     --offload-mode cpu \
     --max-running-requests 1 \
-    --disable-cuda-graph \
-    --host 0.0.0.0
+    --host 0.0.0.0 --port 8000
 
 docker logs -f sglang-glm5-1-nvfp4
