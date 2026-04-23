@@ -4,6 +4,7 @@ docker rm -f qwen3-5-397b-a17b-nvfp4
 
 docker run --device "nvidia.com/gpu=all"  \
   --ipc=host --shm-size=8g --network=host \
+  -d \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
   -v jit-cache:/cache/jit \
   -e NCCL_P2P_LEVEL=SYS \
