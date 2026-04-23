@@ -14,7 +14,7 @@ docker run --device "nvidia.com/gpu=all" \
     --model lukealonso/GLM-5.1-NVFP4 \
     --reasoning-parser glm45 \
     --tool-call-parser glm47 \
-    --tp 4 \
+    --tp-size 4 \
     --trust-remote-code \
     --quantization modelopt_fp4 \
     --kv-cache-dtype bf16 \

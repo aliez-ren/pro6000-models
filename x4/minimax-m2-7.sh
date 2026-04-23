@@ -13,8 +13,7 @@ docker run --device "nvidia.com/gpu=all" \
     --model lukealonso/MiniMax-M2.7-NVFP4 \
     --reasoning-parser minimax \
     --tool-call-parser minimax-m2 \
-    --tp 2 \
-    --pp 2 \
+    --tp-size 2 \
     --enable-torch-compile \
     --trust-remote-code \
     --quantization modelopt_fp4 \
