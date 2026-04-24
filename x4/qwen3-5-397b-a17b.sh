@@ -29,7 +29,7 @@ docker run --device "nvidia.com/gpu=all"  \
     --mamba-scheduler-strategy extra_buffer \
     --mem-fraction-static 0.93 \
     --host 0.0.0.0 \
-    --port 5000 \
+    --port 8000 \
     --enable-pcie-oneshot-allreduce \
     --schedule-conservativeness 0.1 \
     --attention-backend flashinfer \
