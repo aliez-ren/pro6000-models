@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-docker rm -f minimax-m2-7-fp8
+docker rm -f sglang-minimax-m2-7-nvfp4
 
 docker run --device "nvidia.com/gpu=all" \
-  --name minimax-m2-7-fp8 \
+  --name sglang-minimax-m2-7-nvfp4 \
   -d \
   --shm-size 16g \
   -p 8000:8000 \
@@ -25,4 +25,4 @@ docker run --device "nvidia.com/gpu=all" \
     --mem-fraction-static 0.85 \
     --host 0.0.0.0 --port 8000
 
-docker logs -f minimax-m2-7-fp8
+docker logs -f sglang-minimax-m2-7-nvfp4
