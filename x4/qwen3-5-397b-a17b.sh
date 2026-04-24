@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-docker rm -f qwen3-5-397b-a17b-nvfp4
+docker rm -f yqwen3-5-397b-a17b-nvfp4
 
 docker run --device "nvidia.com/gpu=all"  \
+  --name qwen3-5-397b-a17b-nvfp4 \
   --ipc=host --shm-size=8g --network=host \
   -d \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
