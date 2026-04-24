@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-docker rm -f yqwen3-5-397b-a17b-nvfp4
+docker rm -f sglang-qwen3-5-397b-a17b-nvfp4
 
 docker run --device "nvidia.com/gpu=all"  \
-  --name qwen3-5-397b-a17b-nvfp4 \
+  --name sglang-qwen3-5-397b-a17b-nvfp4 \
   --ipc=host --shm-size=8g --network=host \
   -d \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
@@ -13,7 +13,6 @@ docker run --device "nvidia.com/gpu=all"  \
   voipmonitor/sglang:cu130 \
   python3 -m sglang.launch_server \
     --model nvidia/Qwen3.5-397B-A17B-NVFP4 \
-    --served-model-name Qwen3.5 \
     --reasoning-parser qwen3 --tool-call-parser qwen3_coder \
     --tensor-parallel-size 4 \
     --quantization modelopt_fp4 --kv-cache-dtype fp8_e4m3 \
@@ -29,4 +28,4 @@ docker run --device "nvidia.com/gpu=all"  \
     --speculative-algo NEXTN --speculative-num-steps 4 \
     --speculative-eagle-topk 1 --speculative-num-draft-tokens 6
 
-docker logs -f qwen3-5-397b-a17b-nvfp4
+docker logs -f sglang-qwen3-5-397b-a17b-nvfp4
