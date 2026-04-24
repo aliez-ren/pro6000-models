@@ -4,10 +4,11 @@ docker rm -f sglang-minimax-m2-7-nvfp4
 
 docker run --device "nvidia.com/gpu=all" \
   --name sglang-minimax-m2-7-nvfp4 \
+  --ipc=host --shm-size=8g --network=host \
   -d \
-  --shm-size 16g \
-  -p 8000:8000 \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
+  -v jit-cache:/cache/jit \
+  -e SGLANG_ENABLE_SPEC_V2=True \
   voipmonitor/sglang:cu130 \
   python -m sglang.launch_server \
     --model lukealonso/MiniMax-M2.7-NVFP4 \

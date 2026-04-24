@@ -8,7 +8,6 @@ docker run --device "nvidia.com/gpu=all"  \
   -d \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
   -v jit-cache:/cache/jit \
-  -e NCCL_P2P_LEVEL=SYS \
   -e SGLANG_ENABLE_SPEC_V2=True \
   voipmonitor/sglang:cu130 \
   python3 -m sglang.launch_server \
