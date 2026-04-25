@@ -22,12 +22,11 @@ docker run --device "nvidia.com/gpu=all"  \
     --cuda-graph-max-bs 64 \
     --max-running-requests 64 \
     --chunked-prefill-size 16384 \
-    --mamba-scheduler-strategy extra_buffer \
     --mem-fraction-static 0.93 \
     --host 0.0.0.0 \
     --port 8000 \
-    --schedule-conservativeness 0.1 \
     --attention-backend flashinfer \
+    --enable-pcie-oneshot-allreduce \
     --fp4-gemm-backend b12x \
     --moe-runner-backend b12x \
     --sleep-on-idle
