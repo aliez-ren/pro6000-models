@@ -11,8 +11,8 @@ docker run --device "nvidia.com/gpu=all" \
   -e SGLANG_ENABLE_SPEC_V2=True \
   voipmonitor/sglang:cu130 \
   python -m sglang.launch_server \
-    --model lukealonso/MiniMax-M2.7-NVFP4 \
-    --reasoning-parser minimax \
+    --model nvidia/MiniMax-M2.7-NVFP4 \
+    --reasoning-parser minimax-append-think \
     --tool-call-parser minimax-m2 \
     --tp-size 2 \
     --enable-torch-compile \
