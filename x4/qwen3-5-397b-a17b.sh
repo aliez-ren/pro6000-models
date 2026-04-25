@@ -11,13 +11,11 @@ docker run --device "nvidia.com/gpu=all"  \
   -e SGLANG_ENABLE_SPEC_V2=True \
   voipmonitor/sglang:cu130 \
   python3 -m sglang.launch_server \
-    --model nvidia/Qwen3.5-397B-A17B-NVFP4 \
+    --model QuantTrio/Qwen3.5-397B-A17B-AWQ \
     --reasoning-parser qwen3 \
     --tool-call-parser qwen3_coder \
     --tensor-parallel-size 2 \
     --pipeline-parallel-size 2 \
-    --quantization modelopt_fp4 \
-    --kv-cache-dtype fp8_e4m3 \
     --trust-remote-code \
     --cuda-graph-max-bs 64 \
     --max-running-requests 64 \
@@ -27,8 +25,7 @@ docker run --device "nvidia.com/gpu=all"  \
     --port 8000 \
     --attention-backend flashinfer \
     --enable-pcie-oneshot-allreduce \
-    --fp4-gemm-backend b12x \
-    --moe-runner-backend b12x \
-    --sleep-on-idle
+    --sleep-on-idle \
+    --mamba-scheduler-strategy extra_buffer
 
 docker logs -f sglang-qwen3-5-397b-a17b-nvfp4
