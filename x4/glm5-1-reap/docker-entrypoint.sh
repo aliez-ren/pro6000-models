@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODEL_PATH="${MODEL_PATH:-/root/.cache/huggingface/hub/models--0xSero--GLM-5.1-478B-A42B-REAP-NVFP4/snapshots/4a1dc5dae9158b68e3a7f5bd5dc009d409da55ad}"
+MODEL_PATH="${MODEL_PATH:-/root/.cache/huggingface/hub/models--0xSero--GLM-5.1-478B-A42B-REAP-NVFP4/snapshots/531009d551845b10482a19c03fc9eabf6f7d38b9}"
 SERVED_MODEL_NAME="${SERVED_MODEL_NAME:-GLM-5.1-478B-A42B-REAP-NVFP4}"
 HOST="${HOST:-0.0.0.0}"
 PORT="${PORT:-8000}"
@@ -53,6 +53,7 @@ exec python -m sglang.launch_server \
   --tool-call-parser "${TOOL_CALL_PARSER:-glm47}" \
   --reasoning-parser "${REASONING_PARSER:-glm45}" \
   --chat-template "${CHAT_TEMPLATE}" \
-  --model-loader-extra-config '{"enable_multithread_load": true, "num_threads": 16}' \
+  --model-loader-extra-config '{"enable_multithread_load": true, "num_threads": 64}' \
   --watchdog-timeout "${WATCHDOG_TIMEOUT:-1800}" \
+  --json-model-override-args '{"index_topk_pattern": "FFSFSSSFSSFFFSSSFFFSFSSSSSSFFSFFSFFSSFFFFFFSFFFFFSFFSSSSSSFSFFFSFSSSFSFFSFFSSS"}'
   "$@"

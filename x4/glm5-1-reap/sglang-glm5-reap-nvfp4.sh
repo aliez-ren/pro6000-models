@@ -15,9 +15,8 @@ docker run --device "nvidia.com/gpu=all" \
   --ulimit memlock=-1 \
   --ulimit stack=67108864 \
   -p 8000:8000 \
-  -e MODEL_PATH=/root/.cache/huggingface/hub/models--0xSero--GLM-5.1-478B-A42B-REAP-NVFP4/snapshots/4a1dc5dae9158b68e3a7f5bd5dc009d409da55ad \
+  -e MODEL_PATH=/root/.cache/huggingface/hub/models--0xSero--GLM-5.1-478B-A42B-REAP-NVFP4/snapshots/531009d551845b10482a19c03fc9eabf6f7d38b9 \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
-  sglang-glm5-reap-nvfp4:cu129 \
-  --tensor-parallel-size 4
+  sglang-glm5-reap-nvfp4:cu129
 
 docker logs -f sglang-glm5-reap-nvfp4
