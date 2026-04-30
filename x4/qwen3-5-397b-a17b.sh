@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-docker rm -f sglang-qwen3-5-397b-a17b-nvfp4
+docker rm -f sglang-qwen3-5-397b-a17b-awq
 
 docker run --device "nvidia.com/gpu=all"  \
-  --name sglang-qwen3-5-397b-a17b-nvfp4 \
+  --name sglang-qwen3-5-397b-a17b-awq \
   --ipc=host --shm-size=8g --network=host \
   -d \
   -v /root/.cache/huggingface:/root/.cache/huggingface \
@@ -28,4 +28,4 @@ docker run --device "nvidia.com/gpu=all"  \
     --sleep-on-idle \
     --mamba-scheduler-strategy extra_buffer
 
-docker logs -f sglang-qwen3-5-397b-a17b-nvfp4
+docker logs -f sglang-qwen3-5-397b-a17b-awq
