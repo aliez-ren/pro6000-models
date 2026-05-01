@@ -1,0 +1,29 @@
+FROM vllm/vllm-openai:v0.20.0-cu130
+
+ARG VLLM_REPO=https://github.com/jasl/vllm.git
+ARG VLLM_REF=ds4-sm120
+ARG VLLM_CACHE_BUST=manual
+
+USER root
+SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
+
+COPY patches/ /tmp/vllm-patches/
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ca-certificates git \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN echo "VLLM_CACHE_BUST=${VLLM_CACHE_BUST}" \
+  && git clone --depth 1 --branch "${VLLM_REF}" "${VLLM_REPO}" /tmp/vllm-src \
+  && git -C /tmp/vllm-src apply /tmp/vllm-patches/sm120-skip-deepgemm-paged-mqa-metadata.patch \
+  && VLLM_PKG_DIR="$(python3 -c 'import pathlib, vllm; print(pathlib.Path(vllm.__file__).resolve().parent)')" \
+  && cp -a /tmp/vllm-src/vllm/. "${VLLM_PKG_DIR}/" \
+  && rm -rf /tmp/vllm-src
+
+ENV CUDA_HOME=/usr/local/cuda
+ENV TRITON_PTXAS_PATH=/usr/local/cuda/bin/ptxas
+ENV CUDA_ARCH_LIST=120a
+ENV TORCH_CUDA_ARCH_LIST=12.0a
+ENV VLLM_TRITON_MLA_SPARSE=1
+ENV VLLM_TRITON_MLA_SPARSE_HEAD_BLOCK_SIZE=4
+ENV VLLM_RPC_TIMEOUT=100000

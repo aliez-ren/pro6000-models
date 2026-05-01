@@ -1,0 +1,25 @@
+diff --git a/vllm/v1/attention/backends/mla/indexer.py b/vllm/v1/attention/backends/mla/indexer.py
+index 000000000..000000000 100644
+--- a/vllm/v1/attention/backends/mla/indexer.py
++++ b/vllm/v1/attention/backends/mla/indexer.py
+@@ -625,11 +625,17 @@ class DeepseekV32IndexerMetadataBuilder(AttentionMetadataBuilder):
+             if seq_lens.dim() == 1:
+                 seq_lens = seq_lens.unsqueeze(-1)
+ 
+-            # DeepGEMM is required for the paged MQA logits on CUDA devices
+-            if current_platform.is_cuda() and has_deep_gemm():
++            # SM12x uses the vLLM-side paged MQA fallback and does not consume
++            # DeepGEMM schedule metadata. Calling DeepGEMM here raises
++            # "Unsupported architecture" on RTX PRO 6000 Blackwell.
++            if (
++                current_platform.is_cuda()
++                and has_deep_gemm()
++                and not current_platform.is_device_capability_family(120)
++            ):
+                 self.scheduler_metadata_buffer[:] = get_paged_mqa_logits_metadata(
+                     seq_lens,
+                     self.kv_cache_spec.storage_block_size,
+                     self.num_sms,
+                 )
+ 
+             decode_metadata = DeepSeekV32IndexerDecodeMetadata(
